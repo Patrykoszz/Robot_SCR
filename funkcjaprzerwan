@@ -1,0 +1,16 @@
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+	if(GPIO_Pin == GPIO_PIN_5)
+	{
+		if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_5) == GPIO_PIN_SET)
+	    {
+			czas_start = __HAL_TIM_GET_COUNTER(&htim2);
+	    }
+	    else
+	    {
+	    	echo_czas = __HAL_TIM_GET_COUNTER(&htim2) - czas_start;
+	        dystans_cm = echo_czas / 58.0;
+	        pomiar_trwa = 0;
+	    }
+	}
+}
