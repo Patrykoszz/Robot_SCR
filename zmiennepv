@@ -3,3 +3,8 @@ uint32_t echo_czas = 0;
 float dystans_cm = 0.0;
 uint8_t pomiar_trwa = 0;
 uint8_t binarnie = 0;
+
+extern uint32_t czas_start;
+extern uint32_t echo_czas;
+extern float dystans_cm;
+extern uint8_t pomiar_trwa;
