@@ -1,0 +1,11 @@
+void HCSR04_Strzal(void)
+{
+    if (pomiar_trwa == 1) return;
+
+    pomiar_trwa = 1;
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_SET);
+
+    for(volatile int i = 0; i < 100; i++) {}
+
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_RESET);
+}
