@@ -1,0 +1,72 @@
+	strzaly();
+
+	aktualny_czas = HAL_GetTick();
+	dt = (aktualny_czas - stary_czas)/1000.0;
+
+	if(dt <= 0 )
+	{
+		dt = 0.1;
+	}
+
+	wartosc_zadana = 0;
+
+	ograniczenia();
+
+	if(dystans_cm < 15 && dystans_cm > 0)
+	{
+		__HAL_TIM_SET_COMPARE(&htim1 ,TIM_CHANNEL_1, 0);
+		__HAL_TIM_SET_COMPARE(&htim1 ,TIM_CHANNEL_2, 0);
+		HAL_Delay(400);
+		kierunek_tyl_l();
+		kierunek_tyl_p();
+		__HAL_TIM_SET_COMPARE(&htim1 ,TIM_CHANNEL_1, 500);
+		__HAL_TIM_SET_COMPARE(&htim1 ,TIM_CHANNEL_2, 500);
+		HAL_Delay(1500);
+
+	}
+
+	if(dystans_cm_l < 5 && dystans_cm_l > 0)
+	{
+		__HAL_TIM_SET_COMPARE(&htim1 ,TIM_CHANNEL_1, 0);
+		__HAL_TIM_SET_COMPARE(&htim1 ,TIM_CHANNEL_2, 0);
+		HAL_Delay(400);
+		kierunek_tyl_l();
+		kierunek_tyl_p();
+		__HAL_TIM_SET_COMPARE(&htim1 ,TIM_CHANNEL_1, 500);
+		__HAL_TIM_SET_COMPARE(&htim1 ,TIM_CHANNEL_2, 500);
+		HAL_Delay(1500);
+
+	}
+
+	if(dystans_cm_p < 5 && dystans_cm_p > 0)
+	{
+		__HAL_TIM_SET_COMPARE(&htim1 ,TIM_CHANNEL_1, 0);
+		__HAL_TIM_SET_COMPARE(&htim1 ,TIM_CHANNEL_2, 0);
+		HAL_Delay(400);
+		kierunek_tyl_l();
+		kierunek_tyl_p();
+		__HAL_TIM_SET_COMPARE(&htim1 ,TIM_CHANNEL_1, 500);
+		__HAL_TIM_SET_COMPARE(&htim1 ,TIM_CHANNEL_2, 500);
+		HAL_Delay(1500);
+
+	}
+
+	srednia = -1 * dystans_cm_l + 1 * dystans_cm_p;
+
+	e = wartosc_zadana - srednia;
+
+	P = Kp * e;
+	e_calka = e_calka + (e * dt);
+	I = Ki * e_calka;
+	D = Kd * (( poprzednie_e - e) / dt);
+
+	wartosc_sterujaca = P + I + D;
+
+	szybkosc_l = zwykla_predkosc + wartosc_sterujaca;
+	szybkosc_p = zwykla_predkosc - wartosc_sterujaca;
+
+	wybor_kierunek_l();
+	wybor_kierunek_p();
+
+	stary_czas = aktualny_czas;
+	poprzednie_e = e;
