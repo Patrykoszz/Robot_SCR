@@ -1,0 +1,46 @@
+uint32_t czas_start = 0;
+uint32_t echo_czas = 0;
+
+uint32_t czas_start_l = 0;
+uint32_t echo_czas_l = 0;
+
+uint32_t czas_start_p = 0;
+uint32_t echo_czas_p = 0;
+
+float dystans_cm = 0.0;
+float dystans_cm_l = 0.0;
+float dystans_cm_p = 0.0;
+
+uint8_t pomiar_trwa = 0;
+uint8_t pomiar_trwa_l = 0;
+uint8_t pomiar_trwa_p = 0;
+
+uint8_t binarnie = 0;
+
+float Kp = 12;
+float Ki = 0;
+float Kd = 0.05;
+
+float dt;
+
+float srednia = 0;
+float wartosc_zadana = 0;
+float e = 0;
+
+float P;
+float I;
+float D;
+
+float e_calka = 0;
+
+float wartosc_sterujaca;
+
+int szybkosc_l = 0;
+int szybkosc_p = 0;
+
+int zwykla_predkosc = 500;
+
+int poprzednie_e = 0;
+float suma_uchybow = 0.0;
+uint32_t stary_czas = 0;
+uint32_t aktualny_czas = 0;
