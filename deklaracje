@@ -1,0 +1,13 @@
+void HCSR04_Strzal(void);
+void HCSR04_Strzal_l(void);
+void HCSR04_Strzal_p(void);
+
+void strzaly(void);
+
+void kierunek_tyl_l(void);
+void kierunek_tyl_p(void);
+
+void wybor_kierunek_l();
+void wybor_kierunek_p();
+
+void ograniczenia();
